@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+.claude/
+.agent/
+
+# Project Specific
+*.log
+*.tmp
+temp/
+pdf_generation.log
+HRC_Academic_Paper_Final.pdf
+*.pdf
+# Keep the ones provided by the user if they want them, but usually PDFs are generated.
+# Actually, the user might want the academic paper PDF pushed?
+# I'll keep everything else and only exclude system junk.

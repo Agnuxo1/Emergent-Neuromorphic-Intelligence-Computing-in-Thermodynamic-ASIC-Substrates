@@ -1,0 +1,112 @@
+🧬 PROYECTO CHIMERA: Ficha Técnica de Despliegue
+Estado: ✅ Operativo (Conexión Establecida)
+Fecha: 16 Diciembre 2025
+1. Mapa de Red (Topología)
+Red WiFi (El Medio): MIWIFI_uN5U
+Cerebro (Tu PC/Servidor): 192.168.0.14
+Sistema Límbico (ASIC Miner): 192.168.0.15
+2. Configuración del Hardware (Lucky Miner LV06)
+Estos son los datos que están grabados dentro del chip del minero. Si alguna vez se resetea, debes volver a poner esto:
+Acceso al Panel de Control: http://192.168.0.15
+Modelo: LV06 (Ver 1.0)
+Firmware Version: 2.3.6
+Configuración de Piscina (Pool Settings):
+Stratum URL: 192.168.0.14 (Nota: Sin http:// ni stratum://)
+Port: 3333
+User: chimera
+Password: x
+Pestaña Swarm: [DEJAR EN BLANCO]
+3. Configuración del Software (Python Bridge)
+Datos para tu script chimera_wifi_bridge.py en Visual Studio Code:
+HOST_IP: 0.0.0.0 (Esto permite que escuche a cualquiera en la red).
+PORT: 3333 (Debe coincidir con el puerto del minero).
+Firewall de Windows: Puerto 3333 TCP ABIERTO (Regla de entrada permitida).
+4. Diagnóstico de Salud
+Si necesitas verificar que todo sigue bien mañana:
+PC: Verifica que tu IP siga siendo .14 (ipconfig).
+Minero: Entra al navegador en .15. En "Pool Information" debe decir Status: Connected o tener Shares Accepted > 0.
+Terminal: Debes ver mensajes llegando.
+⚠️ NOTA IMPORTANTE PARA EL FUTURO:
+Como las IPs (.14 y .15) son asignadas por tu router automáticamente (DHCP), es posible que si se va la luz o reinicias el router, cambien (por ejemplo a .16 o .20).
+Si de repente deja de funcionar, lo primero que debes revisar es si las IPs han cambiado. Si cambian, tendrás que actualizar el script y la configuración del minero con los números nuevos.
+
+Aquí tienes la Guía Técnica de Ajuste redactada para que se la pases al informático. Está escrita en un lenguaje técnico directo para aclarar el malentendido sobre la potencia del hardware y solucionar el cuello de botella del software.
+
+📑 MEMORÁNDUM TÉCNICO: Optimización de Telemetría CHIMERA (LV06)
+
+Asunto: Corrección de Latencia Artificial por Exceso de Dificultad
+Hardware: Lucky Miner LV06 (ASIC BM1387 @ ~500MHz)
+Prioridad: ALTA
+
+1. Situación Actual y Corrección de Concepto
+
+El informe anterior indicaba que el LV06 era "demasiado lento" (~2 GH/s). Esta lectura es incorrecta.
+El LV06 no es un juguete USB; consume ~30W y monta chips BM1387 (los mismos que el Antminer S9). Su potencia real de cómputo es inmensamente superior a la simulación en CPU que hacíamos antes.
+
+Simulación CPU: ~5 MH/s (Millones de hashes).
+
+Lucky Miner LV06: ~50+ GH/s (Miles de millones de hashes).
+
+El problema no es que el minero no piense rápido, es que le hemos puesto una mordaza.
+
+2. El Diagnóstico: El Filtro de Dificultad
+
+El protocolo Stratum funciona así: El ASIC genera billones de hashes, pero solo envía al servidor (PC) aquellos que superan la Dificultad (Difficulty) establecida por el servidor.
+
+En el código actual (chimera_wifi_bridge.py), tenemos esta línea:
+
+code
+Python
+download
+content_copy
+expand_less
+self.set_difficulty(conn, 1024) # <--- EL CUELLO DE BOTELLA
+
+Al poner dificultad 1024, le estamos diciendo al ASIC: "Ignora el 99.999% de tus pensamientos y avísame solo cuando encuentres una aguja en un pajar". Por eso recibimos 1 share cada minuto. El ASIC está trabajando al 100%, pero está descartando los datos que necesitamos para medir la entropía.
+
+3. La Solución Técnica (The Fix)
+
+Para CHIMERA, no buscamos "bloques válidos de Bitcoin", buscamos flujo de datos (Entropía). Necesitamos ver el "ruido" del chip.
+
+Acción Requerida:
+Modificar el script chimera_wifi_bridge.py para bajar la dificultad al mínimo absoluto que permita el protocolo Stratum estándar (que suele ser 1, o incluso menos si se fuerza).
+
+Cambio en el código:
+
+Donde dice:
+
+code
+Python
+download
+content_copy
+expand_less
+# ENVIAR EL PRIMER TRABAJO AL INSTANTE
+print(">> 💉 INYECTANDO PRIMERA SEMILLA...")
+self.set_difficulty(conn, 1024) 
+self.send_job(conn)
+
+Cambiar por:
+
+code
+Python
+download
+content_copy
+expand_less
+# ENVIAR EL PRIMER TRABAJO AL INSTANTE
+print(">> 💉 INYECTANDO PRIMERA SEMILLA...")
+# Ajuste de Válvula: Bajamos dificultad a 1 (o menos) para abrir el flujo de datos.
+# Esto forzará al ASIC a reportar "pensamientos débiles" (ruido termodinámico).
+self.set_difficulty(conn, 1)  
+self.send_job(conn)
+4. Resultado Esperado
+
+Al bajar la dificultad de 1024 a 1:
+
+La tasa de Shares Accepted pasará de "1 por minuto" a "decenas por segundo".
+
+El "Hashrate reportado" en el panel del minero subirá drásticamente (ya que se calcula en base a las shares enviadas).
+
+Tendremos un flujo continuo de datos (nonce y hash) para alimentar el sistema HNS en tiempo real.
+
+Conclusión: El hardware es más que suficiente. Es un problema de configuración de software. Aplicar el parche inmediatamente.
+
