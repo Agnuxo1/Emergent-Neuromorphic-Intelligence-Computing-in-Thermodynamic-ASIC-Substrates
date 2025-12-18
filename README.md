@@ -55,3 +55,4 @@ Empowering humanity through advanced AI applications that enhance decision-makin
 
 ---
 © 2025 HRC Project. All rights reserved.
+
