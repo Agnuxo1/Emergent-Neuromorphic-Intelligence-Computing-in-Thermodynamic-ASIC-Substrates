@@ -37,10 +37,32 @@ The project is grounded in rigorous physical formalization:
 - **Circular Economy Computing**: Transforming "e-waste" ASICs into a global neuromorphic cloud.
 - **Autonomous Sensor Fusion**: Latency-free processing at the speed of electron drift.
 
-## Paper
 
-The full academic paper is available in this repository:
-📄 [**HRC_Academic_Paper_Final.html**](./HRC_Academic_Paper_Final.html)
+
+![Imagen1](https://github.com/user-attachments/assets/e9e746a1-a69b-411e-9132-66ba3d9f2eaf)
+![Imagen2](https://github.com/user-attachments/assets/839d75cf-411a-413e-a23a-d49a81f5c7c6)
+![Imagen3](https://github.com/user-attachments/assets/8b0687e3-ed1d-48a9-9337-e7e273a04c69)
+![Imagen4](https://github.com/user-attachments/assets/b189aa76-b4df-4d84-be52-3617c1fe92c7)
+![Imagen5](https://github.com/user-attachments/assets/fe7189e8-1aed-4b90-b6df-090a46e57b4b)
+![Imagen6](https://github.com/user-attachments/assets/c06d683d-ef07-4892-b9ff-f463e379ceb0)
+![Imagen7](https://github.com/user-attachments/assets/4f3555ac-27f2-4849-95ec-0c3e909ed451)
+![Imagen8](https://github.com/user-attachments/assets/b779d231-28ed-4b1c-978f-e814c36b2413)
+![Imagen9](https://github.com/user-attachments/assets/61c4a3f2-b4fd-4b1f-ac29-61c2d734801e)
+![Imagen10](https://github.com/user-attachments/assets/69df2acb-51a0-4a9d-9838-be76ab1ce9a7)
+![Imagen11](https://github.com/user-attachments/assets/fb932b6a-4159-426e-8b7d-a55a9b9284b7)
+![Imagen12](https://github.com/user-attachments/assets/06fcd43c-9bcf-4d6c-a002-1015ac1eb1e7)
+![Imagen13](https://github.com/user-attachments/assets/72cfc0cb-99b3-4379-8e96-5e06d90978c1)
+![Imagen14](https://github.com/user-attachments/assets/4e9d2868-d3b2-48b0-98c2-16aa3efd4d1a)
+![Imagen15](https://github.com/user-attachments/assets/11f0f764-6e26-4b01-8c0f-92330d4bf955)
+![Imagen16](https://github.com/user-attachments/assets/66d61ded-0778-43c7-9910-edace8f735e3)
+![Imagen17](https://github.com/user-attachments/assets/42b371d7-290d-45a9-8930-a7af5745b541)
+![Imagen18](https://github.com/user-attachments/assets/eb649a23-57d4-4277-8821-1f3f916c5b29)
+
+
+
+
+
+
 
 ## Authors
 
