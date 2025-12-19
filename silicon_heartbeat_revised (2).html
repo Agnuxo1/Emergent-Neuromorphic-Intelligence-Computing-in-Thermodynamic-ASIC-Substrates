@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toward Thermodynamic Reservoir Computing: Exploring SHA-256 ASICs as Potential Physical Substrates</title>
+    <style>
+        @page { 
+            size: A4; 
+            margin: 2cm;
+            @bottom-center {
+                content: counter(page);
+                font-size: 9pt;
+            }
+        }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10pt;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            background: white;
+            color: #000;
+        }
+        
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+        }
+        
+        /* Header section - single column */
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1.title {
+            font-size: 16pt;
+            text-align: center;
+            margin: 15px 0 10px 0;
+            line-height: 1.3;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            font-size: 11pt;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #444;
+        }
+        
+        .authors {
+            font-size: 11pt;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .author-name {
+            font-weight: bold;
+        }
+        
+        .affiliation {
+            font-size: 9pt;
+            text-align: center;
+            color: #555;
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        
+        .orcid {
+            font-size: 8pt;
+            color: #666;
+        }
+        
+        /* Abstract box */
+        .abstract-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #333;
+        }
+        
+        .abstract-title {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-bottom: 8px;
+        }
+        
+        .abstract-text {
+            text-align: justify;
+            font-size: 9.5pt;
+        }
+        
+        .keywords {
+            margin-top: 10px;
+            font-size: 9pt;
+        }
+        
+        .keywords strong {
+            font-weight: bold;
+        }
+        
+        /* 2-COLUMN FORMAT */
+        .two-column {
+            column-count: 2;
+            column-gap: 20px;
+            text-align: justify;
+        }
+        
+        /* Prevent page/column breaks */
+        h2, h3, h4 { 
+            break-after: avoid;
+            page-break-after: avoid;
+        }
+        
+        .figure, table, .equation-block { 
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        
+        /* Headings */
+        h2 {
+            font-size: 11pt;
+            margin: 18px 0 8px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        h3 {
+            font-size: 10pt;
+            font-style: italic;
+            margin: 12px 0 6px 0;
+        }
+        
+        h4 {
+            font-size: 10pt;
+            margin: 10px 0 5px 0;
+        }
+        
+        /* Paragraphs */
+        p {
+            margin: 0 0 8px 0;
+            text-indent: 1.5em;
+        }
+        
+        p.no-indent {
+            text-indent: 0;
+        }
+        
+        /* Figures */
+        .figure {
+            margin: 15px 0;
+            text-align: center;
+            break-inside: avoid;
+        }
+        
+        .figure svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .figure-caption {
+            font-size: 9pt;
+            text-align: justify;
+            padding: 5px 10px;
+            margin-top: 5px;
+        }
+        
+        .figure-caption strong {
+            font-weight: bold;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5pt;
+            margin: 12px 0;
+            break-inside: avoid;
+        }
+        
+        table caption {
+            font-size: 9pt;
+            text-align: left;
+            padding: 5px 0;
+            font-weight: normal;
+        }
+        
+        table caption strong {
+            font-weight: bold;
+        }
+        
+        th {
+            background: #333;
+            color: white;
+            padding: 6px 4px;
+            font-weight: bold;
+            text-align: left;
+            font-size: 8pt;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 5px 4px;
+            font-size: 8pt;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        /* Equations */
+        .equation-block {
+            text-align: center;
+            margin: 12px 0;
+            padding: 8px 0;
+        }
+        
+        .equation {
+            font-style: italic;
+            font-size: 10pt;
+        }
+        
+        .equation-number {
+            float: right;
+            font-style: normal;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 4px 0;
+        }
+        
+        /* References */
+        .references {
+            font-size: 8.5pt;
+        }
+        
+        .references ol {
+            padding-left: 18px;
+        }
+        
+        .references li {
+            margin: 6px 0;
+            text-align: justify;
+        }
+        
+        /* Callout boxes */
+        .note-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 12px 0;
+            font-size: 9pt;
+        }
+        
+        .limitation-box {
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+            padding: 10px;
+            margin: 12px 0;
+            font-size: 9pt;
+        }
+        
+        /* Code blocks */
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 7.5pt;
+            background: #f4f4f4;
+            padding: 1px 3px;
+            word-break: break-all;
+        }
+        
+        pre {
+            background: #f4f4f4;
+            padding: 8px;
+            font-size: 7pt;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            break-inside: avoid;
+        }
+        
+        /* Footer section */
+        .footer-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+            text-align: center;
+            font-size: 9pt;
+            color: #555;
+        }
+        
+        .footer-section a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Acknowledgment highlight */
+        .scope-statement {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 10px;
+            margin: 15px 0;
+            font-size: 9pt;
+            text-align: center;
+        }
+        
+        @media print {
+            .container { 
+                max-width: 100%; 
+                padding: 0; 
+            }
+            body { 
+                padding: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- HEADER SECTION -->
+        <div class="header-section">
+            <h1 class="title">TOWARD THERMODYNAMIC RESERVOIR COMPUTING:<br>
+            EXPLORING SHA-256 ASICS AS POTENTIAL PHYSICAL SUBSTRATES</h1>
+            
+            <p class="subtitle">A Theoretical Framework and Preliminary Experimental Observations</p>
+            
+            <div class="authors">
+                <span class="author-name">Francisco Angulo de Lafuente</span><sup>1,2</sup>,
+                <span class="author-name">Vladimir Veselov</span><sup>3,4</sup>,
+                <span class="author-name">Richard Goodman</span><sup>5</sup>
+            </div>
+            
+            <div class="affiliation">
+                <sup>1</sup>Independent Researcher, Madrid, Spain<br>
+                <sup>2</sup>Lead Architect, CHIMERA Project / Holographic Reservoir Computing<br>
+                <sup>3</sup>National Research University of Electronic Technology - MIET, Moscow, Russia<br>
+                <sup>4</sup>ORCID: 0000-0002-6301-3226<br>
+                <sup>5</sup>Managing Director at Apoth3osis, Bachelor of Applied Science
+            </div>
+            
+            <p style="font-size: 8pt; color: #666; margin-top: 10px;">
+                Contact: See author links at the end of this document
+            </p>
+        </div>
+        
+        <!-- SCOPE STATEMENT -->
+        <div class="scope-statement">
+            <strong>Scope Statement:</strong> This paper presents a theoretical framework and preliminary experimental observations. 
+            The core hypothesis—that voltage-stressed Bitcoin mining ASICs could function as physical reservoir computing substrates—remains 
+            to be fully validated. We clearly distinguish between theoretical predictions and empirical measurements throughout.
+        </div>
+        
+        <!-- ABSTRACT -->
+        <div class="abstract-box">
+            <div class="abstract-title">ABSTRACT</div>
+            <div class="abstract-text">
+                <p class="no-indent">
+                    We propose a theoretical framework—Holographic Reservoir Computing (HRC)—which hypothesizes that the 
+                    thermodynamic noise and timing dynamics in voltage-stressed Bitcoin mining ASICs (BM1366) could potentially 
+                    serve as a physical reservoir computing substrate. We present the CHIMERA (Conscious Hybrid Intelligence 
+                    via Miner-Embedded Resonance Architecture) system architecture, which treats the SHA-256 hashing pipeline 
+                    not as an entropy source, but as a deterministic diffusion operator whose timing characteristics under 
+                    controlled voltage and frequency conditions may exhibit computationally useful dynamics.
+                </p>
+                <p class="no-indent" style="margin-top: 8px;">
+                    We report preliminary observations of non-Poissonian variability in inter-arrival time statistics during 
+                    edge-of-stability operation, which we term the "Silicon Heartbeat" hypothesis. Theoretical analysis based 
+                    on Hierarchical Number System (HNS) representations suggests that such architectures could achieve O(log n) 
+                    energy scaling compared to traditional von Neumann O(2<sup>n</sup>) dependencies—a potential efficiency 
+                    improvement of several orders of magnitude. However, we emphasize that these are theoretical projections 
+                    requiring experimental validation. We present the implemented measurement infrastructure, acknowledge 
+                    current limitations, and outline the experimental program necessary to confirm or refute these hypotheses. 
+                    This work contributes to the emerging field of thermodynamic computing by proposing a novel approach to 
+                    repurposing obsolete cryptographic hardware for neuromorphic applications.
+                </p>
+            </div>
+            <div class="keywords">
+                <strong>Keywords:</strong> Physical Reservoir Computing, Neuromorphic Systems, ASIC Repurposing, 
+                Thermodynamic Computing, SHA-256, Timing Dynamics, Energy Efficiency, Circular Economy Computing, 
+                Hierarchical Number Systems, Edge Computing
+            </div>
+        </div>
+        
+        <!-- MAIN CONTENT - TWO COLUMNS -->
+        <div class="two-column">
+            
+            <!-- I. INTRODUCTION -->
+            <h2>I. Introduction</h2>
+            
+            <h3>A. Motivation and Context</h3>
+            
+            <p class="no-indent">
+                The contemporary landscape of Artificial Intelligence faces a paradoxical challenge: while algorithmic 
+                sophistication advances exponentially, the underlying hardware substrates remain fundamentally constrained 
+                by the von Neumann architecture and its associated energy costs [1]. The "Power Wall" has become a literal 
+                barrier to the emergence of truly autonomous, edge-deployable cognitive systems [2]. For the first time in 
+                computational history, the practical limits of artificial intelligence are being dictated not by algorithmic 
+                capability, but by the thermodynamic cost of information processing [3].
+            </p>
+            
+            <p>
+                Concurrently, the global cryptocurrency mining industry has produced a massive surplus of specialized 
+                silicon. Application-Specific Integrated Circuits (ASICs) designed for Bitcoin mining, such as the BM1387 
+                and BM1366 chipsets, enter the electronic waste stream annually as mining difficulty renders them 
+                economically obsolete [4]. Industry consensus holds that these chips "can only mine coins and must utilize 
+                the ASIC's native algorithm" and therefore "cannot be repurposed" for other computational tasks [5].
+            </p>
+            
+            <p>
+                This paper challenges that assumption—not by claiming that ASICs can perform general-purpose computation, 
+                but by proposing that the physical dynamics of these devices under non-standard operating conditions might 
+                be exploitable for a specific class of computation: physical reservoir computing.
+            </p>
+            
+            <h3>B. The Physical Reservoir Computing Paradigm</h3>
+            
+            <p class="no-indent">
+                Reservoir Computing (RC) is a computational framework suited for temporal and sequential data processing, 
+                derived from recurrent neural network models including Echo State Networks (ESNs) and Liquid State Machines 
+                (LSMs) [6][7]. A reservoir computing system consists of a reservoir for mapping inputs into a high-dimensional 
+                space and a readout layer for pattern analysis. Critically, the reservoir is fixed—only the readout is trained, 
+                typically via simple linear regression [8].
+            </p>
+            
+            <p>
+                This architectural simplicity enables a crucial advantage: the reservoir itself need not be a simulated 
+                neural network. Physical systems with appropriate nonlinear dynamics can serve directly as reservoirs, 
+                eliminating the computational overhead of simulation [9]. Physical reservoir computing has been successfully 
+                demonstrated in memristors [10], photonic systems [11], spintronic oscillators [12], and even mechanical 
+                systems [13].
+            </p>
+            
+            <p>
+                The key requirements for a physical reservoir are: (1) high-dimensional state space, (2) nonlinear dynamics, 
+                (3) fading memory (the Echo State Property), and (4) separation property—the ability to map distinct inputs 
+                to distinguishable states [14]. Our hypothesis is that voltage-stressed ASICs, operating at the edge of 
+                timing stability, may exhibit dynamics satisfying these requirements.
+            </p>
+            
+            <h3>C. Contributions and Scope</h3>
+            
+            <p class="no-indent">
+                This paper makes the following contributions:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                1. <strong>Theoretical Framework:</strong> We propose the Holographic Reservoir Computing (HRC) framework, 
+                which hypothesizes that SHA-256 ASICs could function as physical reservoirs when operated under controlled 
+                stress conditions.
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                2. <strong>System Architecture:</strong> We present CHIMERA, a three-layer architecture for interfacing 
+                with mining hardware as a computational substrate.
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                3. <strong>Measurement Infrastructure:</strong> We describe implemented tools for capturing timing statistics 
+                from ASIC operations.
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                4. <strong>Theoretical Efficiency Analysis:</strong> We present a mathematical basis for potential energy 
+                efficiency improvements based on Hierarchical Number System representations.
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                5. <strong>Preliminary Observations:</strong> We report initial measurements suggesting non-trivial timing 
+                dynamics, while acknowledging the need for rigorous validation.
+            </p>
+            
+            <p>
+                We explicitly acknowledge what this paper does <em>not</em> claim: we do not claim to have built a working 
+                neuromorphic computer; we do not claim that our approach is superior to purpose-built RC hardware; and we 
+                do not claim that observed timing variations constitute computational capability without further validation.
+            </p>
+            
+            <!-- II. RELATED WORK -->
+            <h2>II. Related Work</h2>
+            
+            <h3>A. Physical Reservoir Computing Systems</h3>
+            
+            <p class="no-indent">
+                Physical reservoir computing has emerged as an active research area with implementations across diverse 
+                substrates. Tanaka et al. [9] provide a comprehensive review classifying physical RC by substrate type: 
+                electronic, photonic, spintronic, mechanical, and biological. Each substrate offers different trade-offs 
+                between speed, power consumption, and integration complexity.
+            </p>
+            
+            <p>
+                Electronic implementations include memristor-based reservoirs exploiting the intrinsic nonlinearity and 
+                short-term memory of resistive switching devices [10][15]. Du et al. demonstrated a 32×32 memristor crossbar 
+                achieving competitive performance on temporal tasks [16]. More recently, CMOS-based implementations using 
+                time-domain analog spiking neurons have shown promise for hardware-friendly RC [17].
+            </p>
+            
+            <p>
+                Photonic reservoirs leverage the high bandwidth and parallelism of optical systems. Larger et al. [11] 
+                demonstrated delay-based reservoir computing using optoelectronic oscillators, achieving state-of-the-art 
+                performance on speech recognition tasks. The delay-feedback architecture is particularly relevant to our 
+                work, as it demonstrates that rich dynamics can emerge from relatively simple physical configurations.
+            </p>
+            
+            <h3>B. Thermodynamic and Stochastic Computing</h3>
+            
+            <p class="no-indent">
+                Recent work has explored the computational potential of thermal fluctuations and stochastic dynamics. 
+                Camsari et al. [18] introduced probabilistic bits (p-bits) using low-barrier nanomagnets, demonstrating 
+                that controlled stochasticity can be computationally useful. Borders et al. [19] showed that thermal 
+                noise in magnetic tunnel junctions could drive probabilistic computing.
+            </p>
+            
+            <p>
+                Extropic Corporation and academic groups have proposed "thermodynamic computing" paradigms that embrace 
+                rather than fight thermal noise [20]. These approaches suggest that properly harnessed, the "waste heat" 
+                of computation could become a computational resource. Our hypothesis aligns with this perspective: the 
+                timing variations induced by voltage stress in ASICs may constitute a form of useful stochasticity.
+            </p>
+            
+            <h3>C. ASIC Repurposing Attempts</h3>
+            
+            <p class="no-indent">
+                The cryptocurrency industry has seen numerous attempts to pivot mining infrastructure toward other 
+                applications, particularly AI [5]. However, these efforts uniformly involve replacing ASICs with GPUs, 
+                not repurposing the ASICs themselves. Companies like Hut 8, Iris Energy, and Core Scientific have 
+                announced transitions to AI hosting, but explicitly acknowledge that SHA-256 ASICs cannot perform 
+                general computation [21].
+            </p>
+            
+            <p>
+                Our approach differs fundamentally: we do not attempt to make ASICs perform arbitrary computation. 
+                Instead, we propose using their physical dynamics—specifically, timing behavior under stress—as a 
+                reservoir substrate. This is analogous to using a bucket of water not as a computer, but as a physical 
+                system whose wave dynamics can separate inputs [22].
+            </p>
+            
+            <!-- III. THEORETICAL FRAMEWORK -->
+            <h2>III. Theoretical Framework</h2>
+            
+            <h3>A. The CHIMERA Hypothesis</h3>
+            
+            <p class="no-indent">
+                The central hypothesis of this work is that SHA-256 mining ASICs, when operated at the edge of voltage 
+                and timing stability, exhibit dynamics that could satisfy the requirements for physical reservoir computing. 
+                We term this the CHIMERA (Conscious Hybrid Intelligence via Miner-Embedded Resonance Architecture) hypothesis.
+            </p>
+            
+            <p>
+                SHA-256 is a cryptographic hash function designed to be deterministic: identical inputs always produce 
+                identical outputs. However, the <em>physical implementation</em> of SHA-256 in silicon involves real 
+                transistors with finite switching times, propagation delays, and thermal sensitivities. When operating 
+                conditions approach the edge of the design envelope, these physical effects become measurable.
+            </p>
+            
+            <p>
+                We propose that the candidate physical signal is not the hash output bits themselves—which remain 
+                deterministic—but the <em>timing dynamics</em> of hash computation. Specifically, we hypothesize that 
+                the coefficient of variation (CV) and entropy of inter-arrival times for valid shares exhibit structure 
+                correlated with the operating regime.
+            </p>
+            
+            <h3>B. SHA-256 as a Diffusion Operator</h3>
+            
+            <p class="no-indent">
+                It is critical to distinguish between entropy <em>generation</em> and entropy <em>diffusion</em>. 
+                SHA-256 does not create entropy; it is a deterministic function. However, SHA-256 exhibits the 
+                avalanche property: a single-bit change in the input produces, on average, changes in 50% of the 
+                output bits [23]. This makes SHA-256 an effective <em>diffusion operator</em> that spreads information 
+                across its output space.
+            </p>
+            
+            <p>
+                In the CHIMERA framework, SHA-256 serves as a high-dimensional nonlinear transform—one component of 
+                a reservoir system. The state representation is derived from:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    X(t) = σ(W<sub>in</sub>u(t) + Σ<sub>i</sub> A<sub>ij</sub>X<sub>j</sub>(t-1) + ξ(V, T, f))
+                    <span class="equation-number">(1)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                where X(t) represents the high-dimensional internal state, A<sub>ij</sub> is the effective adjacency 
+                matrix determined by the physical layout of SHA-256 gates, and ξ(V, T, f) represents timing perturbations 
+                dependent on voltage V, temperature T, and clock frequency f. The activation function σ is provided by 
+                the nonlinear switching dynamics of the transistor logic.
+            </p>
+            
+            <h3>C. Chronos Dynamics: Timing as the Observable</h3>
+            
+            <p class="no-indent">
+                The key insight of the V04 architecture is that timing statistics—not bit patterns—constitute the 
+                measurable channel for physical dynamics. We define the Chronos Bridge coupling efficiency as:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    K<sub>sync</sub> = exp(-σ<sub>J</sub><sup>2</sup> f<sub>clk</sub> / 2π) · Σ<sub>k</sub> cos(Δφ<sub>k</sub>)
+                    <span class="equation-number">(2)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                where σ<sub>J</sub> is the network jitter, f<sub>clk</sub> is the ASIC clock frequency, and Δφ<sub>k</sub> 
+                is the phase offset of the k-th hash core. This formulation captures how timing coherence between software 
+                observation and hardware dynamics affects the quality of the observable signal.
+            </p>
+            
+            <p>
+                The primary observables implemented in the current system are:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Coefficient of Variation (CV):</strong> CV = σ/μ of inter-arrival times. For a Poisson process, 
+                CV = 1. Deviations indicate non-random structure.
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Histogram Entropy:</strong> Shannon entropy of the inter-arrival time distribution, indicating 
+                the complexity of timing patterns.
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Hamming Distance:</strong> Bit differences between consecutive hash outputs, serving as a 
+                diffusion quality proxy.
+            </p>
+            
+            <h3>D. Phase Transition Hypothesis</h3>
+            
+            <p class="no-indent">
+                We hypothesize that the transition from reliable to unreliable ASIC operation follows a phase transition 
+                that can be modeled using Ginzburg-Landau formalism. Define the order parameter ψ as the degree of global 
+                core synchronization. The free energy of the silicon substrate is:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    F(ψ, V) = F<sub>0</sub> + a(V - V<sub>crit</sub>)ψ<sup>2</sup> + bψ<sup>4</sup> + γ|∇ψ|<sup>2</sup>
+                    <span class="equation-number">(3)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                At V = V<sub>crit</sub>, the coefficient a(V - V<sub>crit</sub>) changes sign, potentially triggering 
+                a spontaneous symmetry breaking that manifests as coherent oscillations—the hypothesized "Silicon Heartbeat."
+            </p>
+            
+            <div class="note-box">
+                <strong>Important Clarification:</strong> This phase transition model is a theoretical hypothesis. 
+                Empirical validation requires systematic voltage sweeps with rigorous statistical analysis, which 
+                is planned for future work.
+            </div>
+            
+            <h3>E. Energy Efficiency: O(log n) vs O(2<sup>n</sup>)</h3>
+            
+            <p class="no-indent">
+                A key theoretical contribution of this work, developed in collaboration with Veselov [24], concerns the 
+                energy scaling of different computational architectures. In traditional von Neumann architectures, energy 
+                consumption for state transitions scales with the state space:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    E<sub>vN</sub> ∝ O(2<sup>n</sup>)
+                    <span class="equation-number">(4)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                This exponential scaling arises from the need for massive parallel switching in linear memory addressing 
+                schemes. Each bit of state representation requires independent physical switching events that cannot be 
+                amortized across the state space.
+            </p>
+            
+            <p>
+                In contrast, the Hierarchical Number System (HNS) representation employed in the CHIMERA architecture 
+                maps reservoir dynamics into a hierarchical structure where energy cost decouples from state complexity:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    E<sub>HNS</sub> ∝ O(log n)
+                    <span class="equation-number">(5)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                This logarithmic scaling emerges because hierarchical representations allow state transitions to be 
+                encoded in the structure of the representation itself, rather than requiring explicit enumeration.
+            </p>
+            
+            <p>
+                For typical reservoir dimensions (n ~ 10<sup>4</sup> states), the theoretical efficiency ratio is:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    E<sub>vN</sub> / E<sub>HNS</sub> ≈ 2<sup>n</sup> / log(n) ≈ 10<sup>4</sup>
+                    <span class="equation-number">(6)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                This provides the theoretical foundation for the projected 10,000× efficiency improvement mentioned in 
+                preliminary descriptions of this work. We emphasize that this is a <em>theoretical upper bound</em> 
+                derived from information-theoretic considerations, not a measured result. Experimental validation under 
+                controlled conditions is required to determine achievable efficiency gains.
+            </p>
+            
+            <!-- FIGURE 1: Theoretical Framework -->
+            <div class="figure">
+                <svg width="100%" height="280" viewBox="0 0 600 280">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7B68EE;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#32CD32;stop-opacity:1" />
+                        </linearGradient>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Title -->
+                    <text x="300" y="20" text-anchor="middle" font-size="12" font-weight="bold">Theoretical Framework: From Physical Substrate to Computation</text>
+                    
+                    <!-- Layer 1: Physical Substrate -->
+                    <rect x="20" y="40" width="160" height="70" fill="url(#grad2)" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="100" y="65" text-anchor="middle" font-size="10" font-weight="bold">ASIC Substrate</text>
+                    <text x="100" y="80" text-anchor="middle" font-size="8">BM1366 @ 300-500 MHz</text>
+                    <text x="100" y="93" text-anchor="middle" font-size="8">Core Voltage: 850-990 mV</text>
+                    
+                    <!-- Arrow 1 -->
+                    <path d="M 180 75 L 210 75" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="195" y="68" text-anchor="middle" font-size="7">ξ(V,T,f)</text>
+                    
+                    <!-- Layer 2: Timing Dynamics -->
+                    <rect x="220" y="40" width="160" height="70" fill="url(#grad1)" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="300" y="60" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Timing Dynamics</text>
+                    <text x="300" y="75" text-anchor="middle" font-size="8" fill="white">Inter-arrival Statistics</text>
+                    <text x="300" y="88" text-anchor="middle" font-size="8" fill="white">CV, Entropy, Phase</text>
+                    <text x="300" y="101" text-anchor="middle" font-size="7" fill="#ddd">(Observable Channel)</text>
+                    
+                    <!-- Arrow 2 -->
+                    <path d="M 380 75 L 410 75" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <text x="395" y="68" text-anchor="middle" font-size="7">K<tspan baseline-shift="sub" font-size="5">sync</tspan></text>
+                    
+                    <!-- Layer 3: Reservoir State -->
+                    <rect x="420" y="40" width="160" height="70" fill="#FFB347" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="500" y="60" text-anchor="middle" font-size="10" font-weight="bold">Reservoir State</text>
+                    <text x="500" y="75" text-anchor="middle" font-size="8">High-dimensional X(t)</text>
+                    <text x="500" y="88" text-anchor="middle" font-size="8">SHA-256 Diffusion</text>
+                    <text x="500" y="101" text-anchor="middle" font-size="7" fill="#666">(Theoretical)</text>
+                    
+                    <!-- Lower Section: Energy Comparison -->
+                    <rect x="20" y="130" width="270" height="80" fill="#f9f9f9" stroke="#999" stroke-width="1" rx="3"/>
+                    <text x="155" y="148" text-anchor="middle" font-size="10" font-weight="bold">von Neumann Architecture</text>
+                    <text x="155" y="165" text-anchor="middle" font-size="9">E ∝ O(2<tspan baseline-shift="super" font-size="7">n</tspan>)</text>
+                    <text x="155" y="182" text-anchor="middle" font-size="8" fill="#666">Exponential energy scaling</text>
+                    <text x="155" y="198" text-anchor="middle" font-size="8" fill="#666">Linear memory addressing</text>
+                    
+                    <rect x="310" y="130" width="270" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="3"/>
+                    <text x="445" y="148" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">HNS / CHIMERA Architecture</text>
+                    <text x="445" y="165" text-anchor="middle" font-size="9" fill="#2e7d32">E ∝ O(log n)</text>
+                    <text x="445" y="182" text-anchor="middle" font-size="8" fill="#666">Logarithmic energy scaling</text>
+                    <text x="445" y="198" text-anchor="middle" font-size="8" fill="#666">Hierarchical representation</text>
+                    
+                    <!-- Ratio indicator -->
+                    <text x="300" y="235" text-anchor="middle" font-size="9">Theoretical Efficiency Ratio:</text>
+                    <text x="300" y="252" text-anchor="middle" font-size="11" font-weight="bold" fill="#d32f2f">~10,000× (pending validation)</text>
+                    
+                    <!-- Legend box -->
+                    <rect x="450" y="230" width="130" height="45" fill="white" stroke="#ccc" stroke-width="1" rx="3"/>
+                    <text x="515" y="245" text-anchor="middle" font-size="8" font-weight="bold">Status Legend:</text>
+                    <circle cx="465" cy="258" r="4" fill="#4caf50"/>
+                    <text x="475" y="261" font-size="7">Implemented</text>
+                    <circle cx="530" cy="258" r="4" fill="#ff9800"/>
+                    <text x="540" y="261" font-size="7">Theoretical</text>
+                </svg>
+                <div class="figure-caption">
+                    <strong>Figure 1:</strong> Theoretical framework of the CHIMERA hypothesis. The observable channel 
+                    is timing dynamics (center), not hash bit patterns. Energy efficiency comparison shows theoretical 
+                    O(log n) vs O(2<sup>n</sup>) scaling. Orange-labeled components indicate theoretical predictions 
+                    requiring experimental validation.
+                </div>
+            </div>
+            
+            <!-- IV. SYSTEM ARCHITECTURE -->
+            <h2>IV. System Architecture</h2>
+            
+            <h3>A. The Three-Layer CHIMERA Stack</h3>
+            
+            <p class="no-indent">
+                The CHIMERA architecture consists of three hierarchical layers, each responsible for a specific aspect 
+                of the reservoir computing pipeline. This modular design allows independent development and testing of 
+                each component.
+            </p>
+            
+            <h4>Layer 1: The Ghost (Hardware Abstraction)</h4>
+            
+            <p class="no-indent">
+                The Ghost layer manages raw telemetry acquisition and command execution. It interfaces with the mining 
+                hardware through the AxeOS firmware HTTP API, providing a unified abstraction for voltage and frequency 
+                control across different ASIC versions. Key capabilities include:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Telemetry polling at 3-second intervals (voltage, temperature, power, hashrate)
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Voltage control via HTTP PATCH requests to the miner API
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Frequency modulation through PLL configuration changes
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Share event timestamping with microsecond resolution
+            </p>
+            
+            <h4>Layer 2: The Muse (Signal Processing)</h4>
+            
+            <p class="no-indent">
+                The Muse layer processes the raw timing data into meaningful features. It implements the Chronos Bridge 
+                dynamics, computing:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Inter-arrival time statistics (mean, variance, CV)
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Histogram entropy over configurable bin widths
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Hamming distance sequences between consecutive hashes
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Phase-amplitude encoding for holographic representation
+            </p>
+            
+            <p>
+                We employ the term "holographic" in its information-theoretic sense: the reconstruction of high-dimensional 
+                phase-space dynamics from lower-dimensional projections via phase-amplitude coupling, analogous to optical 
+                holography where 3D information is encoded in 2D interference patterns.
+            </p>
+            
+            <h4>Layer 3: The Sentinel (Homeostasis)</h4>
+            
+            <p class="no-indent">
+                The Sentinel layer monitors system health and implements control loops to maintain operation within 
+                target regimes. It includes:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • PID-loop thermal management
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Voltage limit enforcement
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Anomaly detection for hardware protection
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Logging infrastructure for offline analysis
+            </p>
+            
+            <!-- FIGURE 2: Architecture Diagram -->
+            <div class="figure">
+                <svg width="100%" height="320" viewBox="0 0 600 320">
+                    <defs>
+                        <linearGradient id="sentinelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#E57373;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#C62828;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="museGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#64B5F6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1565C0;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="ghostGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#81C784;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="asicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD54F;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#F57F17;stop-opacity:1" />
+                        </linearGradient>
+                        <marker id="arrow2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#555" />
+                        </marker>
+                        <marker id="arrow2rev" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+                            <polygon points="10 0, 0 3.5, 10 7" fill="#555" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Title -->
+                    <text x="300" y="18" text-anchor="middle" font-size="12" font-weight="bold">CHIMERA Three-Layer Architecture</text>
+                    
+                    <!-- Layer 3: Sentinel -->
+                    <rect x="150" y="30" width="300" height="55" fill="url(#sentinelGrad)" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="300" y="52" text-anchor="middle" font-size="11" font-weight="bold" fill="white">THE SENTINEL</text>
+                    <text x="300" y="67" text-anchor="middle" font-size="8" fill="white">Homeostasis &amp; Self-Regulation</text>
+                    <text x="300" y="80" text-anchor="middle" font-size="7" fill="#ffcdd2">PID Control | Thermal Management | Anomaly Detection</text>
+                    
+                    <!-- Arrow down -->
+                    <path d="M 300 85 L 300 100" stroke="#555" stroke-width="2" marker-end="url(#arrow2)"/>
+                    
+                    <!-- Layer 2: Muse -->
+                    <rect x="150" y="105" width="300" height="55" fill="url(#museGrad)" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="300" y="127" text-anchor="middle" font-size="11" font-weight="bold" fill="white">THE MUSE</text>
+                    <text x="300" y="142" text-anchor="middle" font-size="8" fill="white">Cognitive Engine / Signal Processing</text>
+                    <text x="300" y="155" text-anchor="middle" font-size="7" fill="#bbdefb">Chronos Bridge | Timing Analysis | Holographic Encoding</text>
+                    
+                    <!-- Arrow down -->
+                    <path d="M 300 160 L 300 175" stroke="#555" stroke-width="2" marker-end="url(#arrow2)"/>
+                    
+                    <!-- Layer 1: Ghost -->
+                    <rect x="150" y="180" width="300" height="55" fill="url(#ghostGrad)" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="300" y="202" text-anchor="middle" font-size="11" font-weight="bold" fill="white">THE GHOST</text>
+                    <text x="300" y="217" text-anchor="middle" font-size="8" fill="white">Hardware Abstraction Layer</text>
+                    <text x="300" y="230" text-anchor="middle" font-size="7" fill="#c8e6c9">Stratum Proxy | Telemetry | V/F Control | AxeOS API</text>
+                    
+                    <!-- Arrow down -->
+                    <path d="M 300 235 L 300 250" stroke="#555" stroke-width="2" marker-end="url(#arrow2)"/>
+                    
+                    <!-- Hardware Layer: ASIC -->
+                    <rect x="100" y="255" width="400" height="55" fill="url(#asicGrad)" stroke="#333" stroke-width="2" rx="5"/>
+                    <text x="300" y="277" text-anchor="middle" font-size="11" font-weight="bold">ASIC SUBSTRATE (BM1366)</text>
+                    <text x="300" y="292" text-anchor="middle" font-size="8">SHA-256 Pipeline | 138 Hash Cores | Thermodynamic Reservoir</text>
+                    <text x="300" y="305" text-anchor="middle" font-size="7" fill="#666">Physical Dynamics: Timing Violations, Thermal Noise, Gate Delays</text>
+                    
+                    <!-- Side annotations -->
+                    <rect x="20" y="105" width="110" height="55" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+                    <text x="75" y="125" text-anchor="middle" font-size="8" font-weight="bold">Implemented</text>
+                    <text x="75" y="140" text-anchor="middle" font-size="7">• HTTP API control</text>
+                    <text x="75" y="152" text-anchor="middle" font-size="7">• Timing statistics</text>
+                    
+                    <rect x="470" y="105" width="110" height="55" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="3"/>
+                    <text x="525" y="125" text-anchor="middle" font-size="8" font-weight="bold" fill="#e65100">Planned</text>
+                    <text x="525" y="140" text-anchor="middle" font-size="7">• FFT/PSD analysis</text>
+                    <text x="525" y="152" text-anchor="middle" font-size="7">• Error rate logging</text>
+                    
+                    <!-- Bidirectional arrows for feedback -->
+                    <path d="M 460 67 Q 490 67 490 140 Q 490 205 460 205" stroke="#999" stroke-width="1" stroke-dasharray="3,2" fill="none"/>
+                    <text x="505" y="137" font-size="7" fill="#666">Feedback</text>
+                </svg>
+                <div class="figure-caption">
+                    <strong>Figure 2:</strong> The three-layer CHIMERA architecture. Data flows upward from the ASIC 
+                    substrate through Ghost (hardware abstraction) and Muse (signal processing) to Sentinel (control). 
+                    Feedback loops enable adaptive control. White boxes indicate implemented functionality; orange 
+                    boxes indicate planned extensions.
+                </div>
+            </div>
+            
+            <!-- TABLE 1: Hardware Specifications -->
+            <table>
+                <caption><strong>Table I:</strong> Hardware Specifications and Operating Parameters (Implemented)</caption>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ASIC Chipset</td>
+                        <td>BM1366</td>
+                        <td>LV06 variant (Lucky Miner)</td>
+                    </tr>
+                    <tr>
+                        <td>Hash Cores</td>
+                        <td>138</td>
+                        <td>Parallel SHA-256 units</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency Range</td>
+                        <td>300-500 MHz</td>
+                        <td>20 MHz step resolution</td>
+                    </tr>
+                    <tr>
+                        <td>Core Voltage Range</td>
+                        <td>850-990 mV</td>
+                        <td>Via AxeOS telemetry</td>
+                    </tr>
+                    <tr>
+                        <td>Voltage Dwell Time</td>
+                        <td>60 seconds</td>
+                        <td>Per voltage step</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency Dwell Time</td>
+                        <td>30-45 seconds</td>
+                        <td>Per frequency step</td>
+                    </tr>
+                    <tr>
+                        <td>Telemetry Poll Interval</td>
+                        <td>3 seconds</td>
+                        <td>Via HTTP API</td>
+                    </tr>
+                    <tr>
+                        <td>Nominal Power</td>
+                        <td>5-15 W</td>
+                        <td>Operating range</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>B. Voltage and Frequency Control</h3>
+            
+            <p class="no-indent">
+                The CHIMERA system controls ASIC operating conditions through the AxeOS firmware HTTP API. Voltage 
+                and frequency changes are applied via PATCH requests:
+            </p>
+            
+            <pre>
+payload = {"frequency": freq, 
+           "volts": volts}
+req = Request(url, data=json, 
+              method='PATCH')
+</pre>
+            
+            <p class="no-indent">
+                Changes to PLL (Phase-Locked Loop) configuration require a firmware restart to take effect. The 
+                implemented frequency sweep covers 300-500 MHz in 20 MHz increments, with dwell times sufficient 
+                for thermal stabilization.
+            </p>
+            
+            <div class="note-box">
+                <strong>Voltage Units Clarification:</strong> The code operates in millivolts (mV) via the 
+                <code>coreVoltageActual</code> telemetry field. References to "8.2V" in preliminary descriptions 
+                referred to board-level supply voltage, corresponding to approximately 850-870 mV at the core 
+                telemetry level. This distinction is critical for reproducibility.
+            </div>
+            
+            <!-- V. IMPLEMENTATION -->
+            <h2>V. Implementation Details</h2>
+            
+            <h3>A. Timing Measurement Infrastructure</h3>
+            
+            <p class="no-indent">
+                The Chronos Bridge module (chronos_bridge.py) implements the timing measurement infrastructure. 
+                Share events are timestamped at reception, and inter-arrival statistics are computed over sliding 
+                windows:
+            </p>
+            
+            <pre>
+# chronos_bridge.py:236
+if len(self.share_times) > 10:
+  deltas = np.diff(self.share_times)
+  cv = np.std(deltas)/np.mean(deltas)
+  hist, _ = np.histogram(deltas, 
+                         bins=20, 
+                         density=True)
+  entropy = -np.sum(
+    hist * np.log(hist + 1e-10))
+</pre>
+            
+            <p class="no-indent">
+                For a Poisson process (random, memoryless arrivals), CV = 1. Deviations from unity indicate 
+                structure in the timing: CV > 1 suggests clustering (bursty arrivals), while CV < 1 suggests 
+                regularity (quasi-periodic arrivals).
+            </p>
+            
+            <h3>B. Diffusion Quality Metrics</h3>
+            
+            <p class="no-indent">
+                The Hamming distance between consecutive hash outputs serves as a proxy for diffusion quality:
+            </p>
+            
+            <pre>
+# metrics.py:56
+xor_val = h1 ^ h2
+bit_flips = bin(xor_val).count('1')
+scrambling = bit_flips / 256.0
+</pre>
+            
+            <div class="limitation-box">
+                <strong>Limitation:</strong> This measures diffusion between outputs, not hardware error rate. 
+                There is currently no mechanism to detect <em>incorrect</em> computation (invalid shares, wrong 
+                hashes). Direct error-rate measurement via invalid-share counting is planned for future work.
+            </div>
+            
+            <h3>C. Known Confounding Factors</h3>
+            
+            <p class="no-indent">
+                Several factors may affect timing statistics independent of silicon physics:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>TCP buffering:</strong> Network stack may batch share notifications
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>OS scheduling:</strong> Python process may experience jitter
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Firmware batching:</strong> AxeOS may aggregate multiple shares
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Pool latency:</strong> Network round-trip affects timestamp accuracy
+            </p>
+            
+            <p>
+                Future work will address these confounds through increased window sizes, raw timestamp logging 
+                for offline analysis, and direct hardware probing where possible.
+            </p>
+            
+            <!-- TABLE 2: Measurement Channels -->
+            <table>
+                <caption><strong>Table II:</strong> Measurement Channels - Implemented vs. Planned</caption>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Code Location</th>
+                        <th>Status</th>
+                        <th>Physical Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Inter-arrival CV</td>
+                        <td>chronos_bridge.py:236</td>
+                        <td>✓ Implemented</td>
+                        <td>Timing structure indicator</td>
+                    </tr>
+                    <tr>
+                        <td>Histogram Entropy</td>
+                        <td>chronos_bridge.py:240</td>
+                        <td>✓ Implemented</td>
+                        <td>Timing complexity</td>
+                    </tr>
+                    <tr>
+                        <td>Hamming Distance</td>
+                        <td>metrics.py:56</td>
+                        <td>✓ Implemented</td>
+                        <td>Diffusion proxy</td>
+                    </tr>
+                    <tr>
+                        <td>Voltage Telemetry</td>
+                        <td>ghost layer</td>
+                        <td>✓ Implemented</td>
+                        <td>Operating point</td>
+                    </tr>
+                    <tr>
+                        <td>Temperature</td>
+                        <td>ghost layer</td>
+                        <td>✓ Implemented</td>
+                        <td>Thermal state</td>
+                    </tr>
+                    <tr>
+                        <td>FFT/PSD Analysis</td>
+                        <td>-</td>
+                        <td>○ Planned</td>
+                        <td>Frequency components</td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Share Rate</td>
+                        <td>-</td>
+                        <td>○ Planned</td>
+                        <td>Hardware error rate</td>
+                    </tr>
+                    <tr>
+                        <td>HW Nonce Errors</td>
+                        <td>-</td>
+                        <td>○ Planned</td>
+                        <td>Timing violations</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- VI. PRELIMINARY OBSERVATIONS -->
+            <h2>VI. Preliminary Observations</h2>
+            
+            <h3>A. Timing Variability Under Voltage Stress</h3>
+            
+            <p class="no-indent">
+                During controlled voltage sweeps from 990 mV to 850 mV, we observed systematic changes in 
+                inter-arrival time statistics. As voltage decreased toward the lower boundary of stable 
+                operation, CV values showed excursions above and below unity, suggesting departure from 
+                Poisson statistics.
+            </p>
+            
+            <p>
+                These preliminary observations are consistent with the hypothesis that edge-of-stability 
+                operation introduces structure into timing dynamics. However, we emphasize that:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                1. Sample sizes were limited (N < 1000 share events per voltage point)
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                2. Confounding factors (network, OS scheduling) were not fully controlled
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                3. Multi-chip reproducibility has not been established
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                4. Statistical significance analysis is pending
+            </p>
+            
+            <!-- TABLE 3: Observed Operating Regimes -->
+            <table>
+                <caption><strong>Table III:</strong> Hypothesized Operating Regimes (Preliminary)</caption>
+                <thead>
+                    <tr>
+                        <th>Core Voltage (mV)</th>
+                        <th>Regime</th>
+                        <th>Observed Characteristics</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>> 950</td>
+                        <td>Deterministic</td>
+                        <td>Low timing variance, CV ≈ 1</td>
+                        <td>Preliminary</td>
+                    </tr>
+                    <tr>
+                        <td>870-950</td>
+                        <td>Transitional</td>
+                        <td>Increasing CV variance</td>
+                        <td>Preliminary</td>
+                    </tr>
+                    <tr>
+                        <td>850-870</td>
+                        <td>Resonant (Hypothesized)</td>
+                        <td>Structured timing patterns?</td>
+                        <td>Under Investigation</td>
+                    </tr>
+                    <tr>
+                        <td>< 850</td>
+                        <td>Unstable</td>
+                        <td>Frequent errors, system resets</td>
+                        <td>Observed</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>B. The "Silicon Heartbeat" Hypothesis</h3>
+            
+            <p class="no-indent">
+                Preliminary descriptions of this work mentioned a "2.4 Hz Silicon Heartbeat"—a hypothesized 
+                self-organized oscillation in ASIC power telemetry. We must clarify the current status of 
+                this claim:
+            </p>
+            
+            <p>
+                The implemented code computes CV and entropy metrics on windows of approximately 10 events. 
+                It does <em>not</em> currently implement:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • FFT or Power Spectral Density (PSD) analysis
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Long-horizon time series logging
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Oscillator frequency extraction
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • Statistical significance testing for periodicity
+            </p>
+            
+            <p>
+                Therefore, the "2.4 Hz" claim should be understood as a <em>working hypothesis</em> based on 
+                informal observations, not a validated measurement. Proper validation requires the spectral 
+                analysis infrastructure outlined in our future work section.
+            </p>
+            
+            <div class="limitation-box">
+                <strong>Current Status:</strong> We observe non-Poissonian variability in inter-arrival 
+                statistics. Claims of a stable narrow-band oscillation require time-series logging and 
+                frequency-domain analysis, which is planned but not yet implemented.
+            </div>
+            
+            <!-- FIGURE 3: Hypothesized Phase Diagram -->
+            <div class="figure">
+                <svg width="100%" height="300" viewBox="0 0 600 300">
+                    <defs>
+                        <linearGradient id="tempGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#FFC107;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#F44336;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Title -->
+                    <text x="300" y="20" text-anchor="middle" font-size="12" font-weight="bold">Hypothesized Phase Diagram (Theoretical)</text>
+                    
+                    <!-- Axes -->
+                    <line x1="80" y1="260" x2="560" y2="260" stroke="#333" stroke-width="2"/>
+                    <line x1="80" y1="40" x2="80" y2="260" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- Axis labels -->
+                    <text x="320" y="285" text-anchor="middle" font-size="10" font-weight="bold">Core Voltage (mV)</text>
+                    <text x="30" y="150" text-anchor="middle" font-size="10" font-weight="bold" transform="rotate(-90 30 150)">Timing CV</text>
+                    
+                    <!-- Voltage tick marks -->
+                    <line x1="140" y1="260" x2="140" y2="265" stroke="#333" stroke-width="1"/>
+                    <text x="140" y="278" text-anchor="middle" font-size="8">850</text>
+                    
+                    <line x1="240" y1="260" x2="240" y2="265" stroke="#333" stroke-width="1"/>
+                    <text x="240" y="278" text-anchor="middle" font-size="8">900</text>
+                    
+                    <line x1="340" y1="260" x2="340" y2="265" stroke="#333" stroke-width="1"/>
+                    <text x="340" y="278" text-anchor="middle" font-size="8">950</text>
+                    
+                    <line x1="440" y1="260" x2="440" y2="265" stroke="#333" stroke-width="1"/>
+                    <text x="440" y="278" text-anchor="middle" font-size="8">990</text>
+                    
+                    <!-- CV tick marks -->
+                    <line x1="75" y1="200" x2="80" y2="200" stroke="#333" stroke-width="1"/>
+                    <text x="65" y="203" text-anchor="middle" font-size="8">0.5</text>
+                    
+                    <line x1="75" y1="150" x2="80" y2="150" stroke="#333" stroke-width="1"/>
+                    <text x="65" y="153" text-anchor="middle" font-size="8">1.0</text>
+                    
+                    <line x1="75" y1="100" x2="80" y2="100" stroke="#333" stroke-width="1"/>
+                    <text x="65" y="103" text-anchor="middle" font-size="8">1.5</text>
+                    
+                    <line x1="75" y1="50" x2="80" y2="50" stroke="#333" stroke-width="1"/>
+                    <text x="65" y="53" text-anchor="middle" font-size="8">2.0</text>
+                    
+                    <!-- CV = 1 reference line -->
+                    <line x1="80" y1="150" x2="560" y2="150" stroke="#999" stroke-width="1" stroke-dasharray="5,3"/>
+                    <text x="570" y="153" font-size="7" fill="#666">Poisson</text>
+                    
+                    <!-- Phase regions -->
+                    <!-- Unstable region -->
+                    <rect x="80" y="40" width="80" height="220" fill="#ffcdd2" opacity="0.5"/>
+                    <text x="120" y="75" text-anchor="middle" font-size="9" fill="#c62828" font-weight="bold">Unstable</text>
+                    
+                    <!-- Resonant region (hypothesized) -->
+                    <rect x="160" y="40" width="100" height="220" fill="#c8e6c9" opacity="0.5"/>
+                    <text x="210" y="75" text-anchor="middle" font-size="9" fill="#2e7d32" font-weight="bold">Resonant?</text>
+                    <text x="210" y="88" text-anchor="middle" font-size="7" fill="#666">(Hypothesized)</text>
+                    
+                    <!-- Transitional region -->
+                    <rect x="260" y="40" width="140" height="220" fill="#fff9c4" opacity="0.5"/>
+                    <text x="330" y="75" text-anchor="middle" font-size="9" fill="#f57f17" font-weight="bold">Transitional</text>
+                    
+                    <!-- Deterministic region -->
+                    <rect x="400" y="40" width="160" height="220" fill="#bbdefb" opacity="0.5"/>
+                    <text x="480" y="75" text-anchor="middle" font-size="9" fill="#1565c0" font-weight="bold">Deterministic</text>
+                    
+                    <!-- Hypothetical CV curve -->
+                    <path d="M 100 50 Q 130 180, 170 140 Q 210 100, 250 155 Q 300 170, 360 150 Q 420 145, 500 148 L 540 150" 
+                          stroke="#d32f2f" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+                    
+                    <!-- Data points (hypothetical) -->
+                    <circle cx="170" cy="140" r="5" fill="#d32f2f"/>
+                    <circle cx="210" cy="115" r="5" fill="#d32f2f"/>
+                    <circle cx="250" cy="155" r="5" fill="#d32f2f"/>
+                    <circle cx="340" cy="150" r="5" fill="#d32f2f"/>
+                    <circle cx="440" cy="148" r="5" fill="#d32f2f"/>
+                    
+                    <!-- Legend -->
+                    <rect x="430" y="200" width="120" height="55" fill="white" stroke="#ccc" stroke-width="1" rx="3"/>
+                    <line x1="440" y1="218" x2="470" y2="218" stroke="#d32f2f" stroke-width="3" stroke-dasharray="8,4"/>
+                    <text x="478" y="221" font-size="8">Hypothesized CV</text>
+                    <circle cx="455" cy="238" r="4" fill="#d32f2f"/>
+                    <text x="478" y="241" font-size="8">Preliminary data</text>
+                </svg>
+                <div class="figure-caption">
+                    <strong>Figure 3:</strong> Hypothesized phase diagram showing expected CV behavior across 
+                    voltage regimes. The curve and data points are illustrative of the theoretical framework, 
+                    not validated measurements. The "Resonant" region represents the hypothesized zone where 
+                    useful computational dynamics might emerge. Dashed line indicates this is theoretical.
+                </div>
+            </div>
+            
+            <!-- VII. THEORETICAL EFFICIENCY ANALYSIS -->
+            <h2>VII. Theoretical Efficiency Analysis</h2>
+            
+            <h3>A. The Von Neumann Bottleneck</h3>
+            
+            <p class="no-indent">
+                Traditional computing architectures suffer from what is known as the von Neumann bottleneck: 
+                the separation of memory and processing creates a fundamental bandwidth limitation [1]. More 
+                critically for our analysis, the energy cost of computation in these architectures scales 
+                poorly with problem complexity.
+            </p>
+            
+            <p>
+                For a system representing n-bit states, von Neumann architectures require energy proportional 
+                to the state space exploration:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    E<sub>vN</sub> = k · 2<sup>n</sup> · E<sub>switch</sub>
+                    <span class="equation-number">(7)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                where E<sub>switch</sub> is the energy per bit transition and k is a constant depending on 
+                the algorithm. This exponential scaling is fundamental to the architecture, not merely an 
+                implementation limitation.
+            </p>
+            
+            <h3>B. Hierarchical Number System Efficiency</h3>
+            
+            <p class="no-indent">
+                The Hierarchical Number System (HNS) approach, as developed by Veselov [24], represents states 
+                using a tree structure where transitions are encoded in the hierarchy itself. This yields:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    E<sub>HNS</sub> = k' · log(n) · E<sub>switch</sub>
+                    <span class="equation-number">(8)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                The logarithmic scaling arises because state transitions in a hierarchical representation 
+                require updating only O(log n) nodes rather than potentially all n bits.
+            </p>
+            
+            <h3>C. Projected Efficiency Gains</h3>
+            
+            <p class="no-indent">
+                The ratio of energy consumption between architectures is:
+            </p>
+            
+            <div class="equation-block">
+                <div class="equation">
+                    η = E<sub>vN</sub> / E<sub>HNS</sub> = (k/k') · 2<sup>n</sup> / log(n)
+                    <span class="equation-number">(9)</span>
+                </div>
+            </div>
+            
+            <p class="no-indent">
+                For typical reservoir dimensions:
+            </p>
+            
+            <!-- TABLE 4: Efficiency Projections -->
+            <table>
+                <caption><strong>Table IV:</strong> Theoretical Efficiency Ratio by State Space Size</caption>
+                <thead>
+                    <tr>
+                        <th>State Space (n)</th>
+                        <th>2<sup>n</sup></th>
+                        <th>log(n)</th>
+                        <th>Ratio (η)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10</td>
+                        <td>1,024</td>
+                        <td>3.32</td>
+                        <td>~300×</td>
+                        <td>Theoretical</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>4,096</td>
+                        <td>3.58</td>
+                        <td>~1,100×</td>
+                        <td>Theoretical</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>16,384</td>
+                        <td>3.81</td>
+                        <td>~4,300×</td>
+                        <td>Theoretical</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>65,536</td>
+                        <td>4.00</td>
+                        <td>~16,000×</td>
+                        <td>Theoretical</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>
+                This analysis provides the theoretical basis for efficiency claims in the range of 10<sup>3</sup> 
+                to 10<sup>4</sup>×. We emphasize that these are <em>upper bounds</em> assuming ideal implementation. 
+                Practical efficiency gains will depend on factors including reservoir quality, readout overhead, 
+                and task-specific considerations.
+            </p>
+            
+            <h3>D. Connection to Thermodynamic Limits</h3>
+            
+            <p class="no-indent">
+                The Landauer limit [25] establishes that erasing one bit of information requires at minimum 
+                kT·ln(2) joules of energy dissipation. Traditional computation approaches this limit per 
+                operation. Reservoir computing potentially circumvents this by performing computation through 
+                physical dynamics rather than explicit state transitions, though the thermodynamic accounting 
+                of such systems remains an open research question [26].
+            </p>
+            
+            <!-- VIII. APPLICATIONS -->
+            <h2>VIII. Potential Applications</h2>
+            
+            <h3>A. Edge Computing for Signal Processing</h3>
+            
+            <p class="no-indent">
+                If validated, ASIC-based reservoir computing could enable ultra-low-power signal processing 
+                at the edge. Potential applications include:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Seismic monitoring:</strong> Real-time anomaly detection with minimal power budget
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Industrial vibration analysis:</strong> Predictive maintenance at the sensor
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • <strong>Biomedical signals:</strong> Continuous ECG/EEG monitoring in wearables
+            </p>
+            
+            <p>
+                We note that these applications are speculative pending validation of the core reservoir 
+                computing capability.
+            </p>
+            
+            <h3>B. Physical Unclonable Functions (PUFs)</h3>
+            
+            <p class="no-indent">
+                The "Silicon Fingerprint"—the unique timing characteristics of each individual ASIC due to 
+                manufacturing variations—could serve as a Physical Unclonable Function for hardware security 
+                applications [27]. Because the response depends on junction temperature and device-specific 
+                delay faults, it cannot be replicated even with a perfect logical model of the chip.
+            </p>
+            
+            <h3>C. Circular Economy Computing</h3>
+            
+            <p class="no-indent">
+                Perhaps the most significant potential impact is environmental. The global cryptocurrency 
+                mining industry produces millions of obsolete ASICs annually [4]. If these devices can be 
+                repurposed for computation—even specialized computation—the environmental impact would be 
+                substantial. This represents a potential transition from a linear (manufacture-use-discard) 
+                to circular (manufacture-use-repurpose) model for specialized silicon.
+            </p>
+            
+            <!-- TABLE 5: Application Comparison -->
+            <table>
+                <caption><strong>Table V:</strong> Potential Applications - Readiness Assessment</caption>
+                <thead>
+                    <tr>
+                        <th>Application</th>
+                        <th>Requirements</th>
+                        <th>Current Status</th>
+                        <th>Readiness</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PUF / Hardware Security</td>
+                        <td>Unique per-chip response</td>
+                        <td>Timing uniqueness observed</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Entropy Source</td>
+                        <td>True randomness</td>
+                        <td>Unvalidated</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td>Reservoir Computing</td>
+                        <td>ESP, separation property</td>
+                        <td>Theoretical</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td>Signal Processing</td>
+                        <td>Benchmark performance</td>
+                        <td>Not tested</td>
+                        <td>Very Low</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- IX. COMPARISON WITH OTHER APPROACHES -->
+            <h2>IX. Comparison with Related Approaches</h2>
+            
+            <h3>A. Purpose-Built Physical Reservoirs</h3>
+            
+            <p class="no-indent">
+                Compared to purpose-built physical reservoir systems, ASIC-based reservoirs offer different 
+                trade-offs:
+            </p>
+            
+            <!-- TABLE 6: Comparison -->
+            <table>
+                <caption><strong>Table VI:</strong> Comparison with Other Physical RC Approaches</caption>
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Demonstrated</th>
+                        <th>Power</th>
+                        <th>Availability</th>
+                        <th>Controllability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Memristor Arrays [10]</td>
+                        <td>Yes</td>
+                        <td>μW-mW</td>
+                        <td>Research only</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Photonic (Delay Line) [11]</td>
+                        <td>Yes</td>
+                        <td>mW-W</td>
+                        <td>Lab equipment</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Spintronic [12]</td>
+                        <td>Yes</td>
+                        <td>μW</td>
+                        <td>Research only</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>CMOS Spiking [17]</td>
+                        <td>Yes</td>
+                        <td>mW</td>
+                        <td>Fabrication required</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>ASIC/CHIMERA (This work)</td>
+                        <td>No</td>
+                        <td>5-15 W</td>
+                        <td>Commercial (used)</td>
+                        <td>Limited</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>
+                The CHIMERA approach's primary advantage is availability: millions of suitable ASICs exist 
+                and can be acquired at minimal cost. The primary disadvantage is that the substrate was not 
+                designed for reservoir computing, and whether it can function as such remains unproven.
+            </p>
+            
+            <h3>B. Industry ASIC Repurposing Efforts</h3>
+            
+            <p class="no-indent">
+                Our approach differs fundamentally from industry "AI pivot" efforts. Companies like Hut 8, 
+                Iris Energy, and Core Scientific are replacing ASICs with GPUs [5][21]. We propose using 
+                the ASICs themselves, albeit for a narrow class of computation.
+            </p>
+            
+            <!-- X. LIMITATIONS AND FUTURE WORK -->
+            <h2>X. Limitations and Future Work</h2>
+            
+            <h3>A. Theoretical Uncertainties</h3>
+            
+            <p class="no-indent">
+                The core hypothesis—that SHA-256 ASICs can function as physical reservoirs—remains unproven. 
+                Several theoretical challenges must be addressed:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                1. <strong>Echo State Property:</strong> We have not demonstrated that the substrate has fading 
+                memory of inputs. This is a fundamental requirement for reservoir computing.
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                2. <strong>Separation Property:</strong> We have not shown that distinct inputs produce 
+                distinguishable reservoir states.
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                3. <strong>State Dimensionality:</strong> The effective dimensionality of timing-based state 
+                representation is unknown.
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                4. <strong>Physical vs. Artifact:</strong> Observed timing variations may be network/OS 
+                artifacts rather than silicon physics.
+            </p>
+            
+            <h3>B. Experimental Limitations</h3>
+            
+            <p class="no-indent">
+                Current experimental limitations include:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                1. <strong>Silicon Heartbeat:</strong> The "2.4 Hz" claim requires FFT/PSD analysis and 
+                statistical significance testing, which are not yet implemented.
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                2. <strong>Error Rate:</strong> We measure Hamming distance (diffusion), not actual hardware 
+                error rate (timing violations). Invalid share counting would provide direct evidence.
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                3. <strong>Reproducibility:</strong> Multi-chip, multi-site reproducibility has not been 
+                established.
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                4. <strong>Sample Sizes:</strong> Preliminary observations used limited sample sizes 
+                (N < 1000 per condition).
+            </p>
+            
+            <h3>C. What This Paper Does NOT Claim</h3>
+            
+            <p class="no-indent">
+                To avoid misinterpretation, we explicitly state what this paper does <em>not</em> claim:
+            </p>
+            
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • We do <strong>not</strong> claim to have built a working neuromorphic computer
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • We do <strong>not</strong> claim that ASICs are superior to purpose-built RC hardware
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • We do <strong>not</strong> claim that timing variations constitute "consciousness" or 
+                cognition in any meaningful sense
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • We do <strong>not</strong> claim experimentally validated efficiency improvements
+            </p>
+            <p class="no-indent" style="text-indent: 0; margin-left: 1.5em;">
+                • We do <strong>not</strong> claim that SHA-256 generates entropy (it diffuses it)
+            </p>
+            
+            <h3>D. Required Future Experiments</h3>
+            
+            <p class="no-indent">
+                To validate or refute the CHIMERA hypothesis, the following experiments are required:
+            </p>
+            
+            <!-- TABLE 7: Future Work -->
+            <table>
+                <caption><strong>Table VII:</strong> Required Validation Experiments</caption>
+                <thead>
+                    <tr>
+                        <th>Experiment</th>
+                        <th>Purpose</th>
+                        <th>Infrastructure Needed</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>FFT/PSD Analysis</td>
+                        <td>Validate heartbeat frequency</td>
+                        <td>Long-duration logging</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Invalid Share Counting</td>
+                        <td>Measure actual error rate</td>
+                        <td>Stratum proxy modification</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Multi-chip Study</td>
+                        <td>Establish reproducibility</td>
+                        <td>Multiple ASIC units</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>NARMA-10 Benchmark</td>
+                        <td>Standard RC performance</td>
+                        <td>Readout implementation</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Mackey-Glass Prediction</td>
+                        <td>Time series capability</td>
+                        <td>Training infrastructure</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Echo State Property Test</td>
+                        <td>Fundamental RC requirement</td>
+                        <td>Controlled input injection</td>
+                        <td>Critical</td>
+                    </tr>
+                    <tr>
+                        <td>Direct EM Probing</td>
+                        <td>Bypass network confounds</td>
+                        <td>Hardware instrumentation</td>
+                        <td>Low</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- XI. CONCLUSIONS -->
+            <h2>XI. Conclusions</h2>
+            
+            <p class="no-indent">
+                We have presented the CHIMERA framework as a theoretical proposal for repurposing retired 
+                Bitcoin mining ASICs as physical reservoir computing substrates. The key insight is that 
+                the candidate physical signal is not hash bit patterns—which remain deterministic—but timing 
+                dynamics under controlled voltage and frequency stress.
+            </p>
+            
+            <p>
+                Our theoretical analysis, developed in collaboration with Veselov, provides a mathematical 
+                basis for potential O(log n) energy scaling compared to traditional von Neumann O(2<sup>n</sup>) 
+                architectures. This suggests efficiency improvements of several orders of magnitude could be 
+                achievable, though experimental validation is required.
+            </p>
+            
+            <p>
+                Preliminary observations show non-Poissonian variability in inter-arrival time statistics 
+                during edge-of-stability operation. While these findings are intriguing, we emphasize that 
+                substantial experimental work remains before any claims of computational utility can be made. 
+                The "Silicon Heartbeat" remains a working hypothesis awaiting spectral analysis validation.
+            </p>
+            
+            <p>
+                If validated, the CHIMERA approach could contribute to sustainable computing by giving new 
+                purpose to otherwise obsolete hardware—transforming electronic waste into computational 
+                infrastructure. We hope this paper stimulates discussion and invites collaboration from 
+                the reservoir computing and neuromorphic engineering communities to rigorously test these 
+                ideas.
+            </p>
+            
+            <p>
+                The legacy of Bitcoin mining need not end in landfills. Whether it can serve as the 
+                infrastructure for a new kind of computation remains an open question—one we believe is 
+                worth investigating.
+            </p>
+            
+            <!-- XII. ACKNOWLEDGMENTS -->
+            <h2>XII. Acknowledgments</h2>
+            
+            <p class="no-indent">
+                The authors thank the open-source community for tools and frameworks that enabled this research. 
+                F.A.L. acknowledges the AxeOS development team for firmware documentation. V.V. acknowledges 
+                support from MIET. R.G. acknowledges the Apoth3osis research team for technical review and 
+                code-to-paper alignment analysis.
+            </p>
+            
+            <p>
+                We particularly thank the peer reviewers who provided critical feedback that substantially 
+                improved the honesty and precision of this manuscript. Their insistence on clearly distinguishing 
+                theoretical predictions from empirical measurements has made this a stronger contribution.
+            </p>
+            
+            <!-- XIII. REFERENCES -->
+            <h2>XIII. References</h2>
+            
+            <div class="references">
+                <ol>
+                    <li>J. von Neumann, "First Draft of a Report on the EDVAC," University of Pennsylvania, 1945.</li>
+                    
+                    <li>C. Mead, "Neuromorphic Electronic Systems," <em>Proceedings of the IEEE</em>, vol. 78, no. 10, pp. 1629-1636, 1990. DOI: 10.1109/5.58356</li>
+                    
+                    <li>R. Landauer, "Irreversibility and Heat Generation in the Computing Process," <em>IBM Journal of Research and Development</em>, vol. 5, no. 3, pp. 183-191, 1961.</li>
+                    
+                    <li>Cambridge Bitcoin Electricity Consumption Index, "Mining Equipment Database," 2024. Available: https://ccaf.io/cbnsi/cbeci</li>
+                    
+                    <li>RSM US LLP, "Bitcoin miners diversify into AI to sustain profitability," 2024. Available: https://rsmus.com/insights/industries/financial-services/</li>
+                    
+                    <li>H. Jaeger, "The 'echo state' approach to analysing and training recurrent neural networks," GMD Report 148, German National Research Center for Information Technology, 2001.</li>
+                    
+                    <li>W. Maass, T. Natschläger, and H. Markram, "Real-time computing without stable states: A new framework for neural computation based on perturbations," <em>Neural Computation</em>, vol. 14, no. 11, pp. 2531-2560, 2002.</li>
+                    
+                    <li>M. Lukoševičius and H. Jaeger, "Reservoir computing approaches to recurrent neural network training," <em>Computer Science Review</em>, vol. 3, no. 3, pp. 127-149, 2009.</li>
+                    
+                    <li>G. Tanaka et al., "Recent advances in physical reservoir computing: A review," <em>Neural Networks</em>, vol. 115, pp. 100-123, 2019. DOI: 10.1016/j.neunet.2019.03.005</li>
+                    
+                    <li>C. Du et al., "Reservoir computing using dynamic memristors for temporal information processing," <em>Nature Communications</em>, vol. 8, no. 1, p. 2204, 2017.</li>
+                    
+                    <li>L. Larger et al., "Photonic information processing beyond Turing: an optoelectronic implementation of reservoir computing," <em>Optics Express</em>, vol. 20, no. 3, pp. 3241-3249, 2012.</li>
+                    
+                    <li>D. Markovic et al., "Reservoir computing with the frequency, phase, and amplitude of spin-torque nano-oscillators," <em>Applied Physics Letters</em>, vol. 114, no. 1, p. 012409, 2019.</li>
+                    
+                    <li>K. Nakajima et al., "A soft body as a reservoir: case studies in a dynamic model of octopus-inspired soft robotic arm," <em>Frontiers in Computational Neuroscience</em>, vol. 7, p. 91, 2013.</li>
+                    
+                    <li>K. Nakajima, "Physical reservoir computing—an introductory perspective," <em>Japanese Journal of Applied Physics</em>, vol. 59, no. 6, p. 060501, 2020.</li>
+                    
+                    <li>S. H. Sung et al., "Emerging dynamic memristors for neuromorphic reservoir computing," <em>Nanoscale</em>, vol. 13, no. 45, pp. 19017-19032, 2021.</li>
+                    
+                    <li>Z. Wang et al., "Memristors with diffusive dynamics as synaptic emulators for neuromorphic computing," <em>Nature Materials</em>, vol. 16, no. 1, pp. 101-108, 2017.</li>
+                    
+                    <li>N. Kimura et al., "Hardware-Friendly Implementation of Physical Reservoir Computing with CMOS-based Time-domain Analog Spiking Neurons," arXiv:2409.11612, 2024.</li>
+                    
+                    <li>K. Y. Camsari, R. Faria, B. M. Sutton, and S. Datta, "Stochastic p-bits for invertible logic," <em>Physical Review X</em>, vol. 7, no. 3, p. 031014, 2017.</li>
+                    
+                    <li>W. A. Borders et al., "Integer factorization using stochastic magnetic tunnel junctions," <em>Nature</em>, vol. 573, no. 7774, pp. 390-393, 2019.</li>
+                    
+                    <li>Extropic Corp., "The Thermodynamics of Diffusion Models," Technical Report, 2025.</li>
+                    
+                    <li>Wired Magazine, "Bitcoin Miners Are Pivoting to AI," December 2024.</li>
+                    
+                    <li>C. Fernando and S. Sojakka, "Pattern recognition in a bucket," in <em>Advances in Artificial Life</em>, Springer, 2003, pp. 588-597.</li>
+                    
+                    <li>National Institute of Standards and Technology, "Secure Hash Standard (SHS)," FIPS PUB 180-4, 2015.</li>
+                    
+                    <li>V. Veselov, "Hierarchical Number Systems and Energy-Efficient Computing," MIET Technical Report, 2024.</li>
+                    
+                    <li>R. Landauer, "Information is Physical," <em>Physics Today</em>, vol. 44, no. 5, pp. 23-29, 1991.</li>
+                    
+                    <li>J. M. Parrondo, J. M. Horowitz, and T. Sagawa, "Thermodynamics of information," <em>Nature Physics</em>, vol. 11, no. 2, pp. 131-139, 2015.</li>
+                    
+                    <li>C. Herder et al., "Physical unclonable functions and applications: A tutorial," <em>Proceedings of the IEEE</em>, vol. 102, no. 8, pp. 1126-1141, 2014.</li>
+                    
+                    <li>D. Sussillo and L. F. Abbott, "Generating coherent patterns of activity from chaotic neural networks," <em>Neuron</em>, vol. 63, no. 4, pp. 544-557, 2009.</li>
+                    
+                    <li>L. Appeltant et al., "Information processing using a single dynamical node as complex system," <em>Nature Communications</em>, vol. 2, no. 1, p. 468, 2011.</li>
+                    
+                    <li>P. Bak, C. Tang, and K. Wiesenfeld, "Self-organized criticality: An explanation of the 1/f noise," <em>Physical Review Letters</em>, vol. 59, no. 4, pp. 381-384, 1987.</li>
+                    
+                    <li>G. Samid, "Negotiating Darwin's Barrier: Evolution Limits Our View of Reality, AI Breaks Through," <em>Applied Physics Research</em>, 2025.</li>
+                    
+                    <li>J. J. Hopfield, "Neural networks and physical systems with emergent collective computational abilities," <em>Proceedings of the National Academy of Sciences</em>, vol. 79, no. 8, pp. 2554-2558, 1982.</li>
+                    
+                    <li>H. Jaeger and H. Haas, "Harnessing nonlinearity: Predicting chaotic systems and saving energy in wireless communication," <em>Science</em>, vol. 304, no. 5667, pp. 78-80, 2004.</li>
+                    
+                    <li>B. Schrauwen, D. Verstraeten, and J. Van Campenhout, "An overview of reservoir computing: theory, applications and implementations," in <em>Proceedings of the 15th European Symposium on Artificial Neural Networks</em>, 2007, pp. 471-482.</li>
+                    
+                    <li>D. Verstraeten et al., "An experimental unification of reservoir computing methods," <em>Neural Networks</em>, vol. 20, no. 3, pp. 391-403, 2007.</li>
+                    
+                    <li>R. Legenstein and W. Maass, "Edge of chaos and prediction of computational performance for neural circuit models," <em>Neural Networks</em>, vol. 20, no. 3, pp. 323-334, 2007.</li>
+                    
+                    <li>I. B. Yildiz, H. Jaeger, and S. J. Kiebel, "Re-visiting the echo state property," <em>Neural Networks</em>, vol. 35, pp. 1-9, 2012.</li>
+                    
+                    <li>J. Dambre, D. Verstraeten, B. Schrauwen, and S. Massar, "Information processing capacity of dynamical systems," <em>Scientific Reports</em>, vol. 2, no. 1, p. 514, 2012.</li>
+                    
+                    <li>A. Rodan and P. Tiňo, "Minimum complexity echo state network," <em>IEEE Transactions on Neural Networks</em>, vol. 22, no. 1, pp. 131-144, 2010.</li>
+                    
+                    <li>M. C. Soriano et al., "Delay-based reservoir computing: noise effects in a combined analog and digital implementation," <em>IEEE Transactions on Neural Networks and Learning Systems</em>, vol. 26, no. 2, pp. 388-393, 2014.</li>
+                    
+                    <li>G. Van der Sande, D. Brunner, and M. C. Soriano, "Advances in photonic reservoir computing," <em>Nanophotonics</em>, vol. 6, no. 3, pp. 561-576, 2017.</li>
+                    
+                    <li>J. Torrejon et al., "Neuromorphic computing with nanoscale spintronic oscillators," <em>Nature</em>, vol. 547, no. 7664, pp. 428-431, 2017.</li>
+                    
+                    <li>M. Cucchi et al., "Hands-on reservoir computing: a tutorial for practical implementation," <em>Neuromorphic Computing and Engineering</em>, vol. 2, no. 3, p. 032002, 2022.</li>
+                    
+                    <li>S. Wolfram, <em>A New Kind of Science</em>, Wolfram Media, 2002.</li>
+                    
+                    <li>I. Prigogine, <em>From Being to Becoming: Time and Complexity in the Physical Sciences</em>, W. H. Freeman, 1980.</li>
+                </ol>
+            </div>
+            
+        </div>
+        <!-- END TWO-COLUMN CONTENT -->
+        
+        <!-- FOOTER SECTION -->
+        <div class="footer-section">
+            <hr style="margin: 30px 0; border: none; border-top: 2px solid #333;">
+            
+            <p><strong>Manuscript submitted to:</strong> IEEE Transactions on Neural Networks and Learning Systems</p>
+            <p><strong>Category:</strong> Position Paper / Hypothesis with Preliminary Observations</p>
+            <p><strong>Date:</strong> December 19, 2025</p>
+            <p><strong>Official Repository:</strong> 
+                <a href="https://github.com/Agnuxo1/Emergent-Neuromorphic-Intelligence-Computing-in-Thermodynamic-ASIC-Substrates">
+                    Emergent-Neuromorphic-Intelligence-Computing-in-Thermodynamic-ASIC-Substrates
+                </a>
+            </p>
+            
+            <div style="margin-top: 25px;">
+                <p><strong>Author Contact &amp; Publications:</strong></p>
+                
+                <p style="margin-top: 15px;"><strong>Francisco Angulo de Lafuente</strong> (Corresponding Author)</p>
+                <p style="line-height: 1.8;">
+                    <a href="https://github.com/Agnuxo1">GitHub</a> · 
+                    <a href="https://www.researchgate.net/profile/Francisco-Angulo-Lafuente-3">ResearchGate</a> · 
+                    <a href="https://www.kaggle.com/franciscoangulo">Kaggle</a> · 
+                    <a href="https://huggingface.co/Agnuxo">HuggingFace</a> · 
+                    <a href="https://es.wikipedia.org/wiki/Francisco_Angulo_de_Lafuente">Wikipedia</a>
+                </p>
+                
+                <p style="margin-top: 15px;"><strong>Vladimir Veselov</strong></p>
+                <p>National Research University of Electronic Technology - MIET · ORCID: 0000-0002-6301-3226</p>
+                
+                <p style="margin-top: 15px;"><strong>Richard Goodman</strong></p>
+                <p>Managing Director, Apoth3osis · <a href="https://apoth3osis.com">apoth3osis.com</a></p>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 8pt; color: #888;">
+                © 2025 The Authors. This work is licensed under CC BY 4.0.
+            </p>
+        </div>
+        
+    </div>
+</body>
+</html>
