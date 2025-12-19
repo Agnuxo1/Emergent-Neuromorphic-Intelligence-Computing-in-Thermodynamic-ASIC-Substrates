@@ -5,9 +5,6 @@
 
 > **"The legacy of Bitcoin is not just financial; it is the infrastructure for a new kind of mind."**
 
-Aquí tienes el contenido completo del PDF convertido a Markdown, incluyendo tablas para representar las gráficas y figuras:
-
-```markdown
 # TOWARD THERMODYNAMIC RESERVOIR COMPUTING: EXPLORING SHA-256 ASICS AS POTENTIAL PHYSICAL SUBSTRATES
 
 *A Theoretical Framework and Preliminary Experimental Observations*
@@ -125,7 +122,7 @@ $$
 X(t) = \sigma \left( W_{in} u(t) + \Sigma_i A_{ij} X_j(t-1) + \xi(V, T, f) \right)
 $$
 
-where \( X(t) \) represents the high-dimensional internal state, \( A_{ij} \) is the effective adjacency matrix determined by the physical layout of SHA-256 gates, and \( \xi(V, T, f) \) represents timing perturbations dependent on voltage \( V \), temperature \( T \), and clock frequency \( f \). The activation function \( \sigma \) is provided by the nonlinear switching dynamics of the transistor logic.
+where $ X(t) $ represents the high-dimensional internal state, $ A_{ij} $ is the effective adjacency matrix determined by the physical layout of SHA-256 gates, and $ \xi(V, T, f) $ represents timing perturbations dependent on voltage $ V $, temperature $ T $, and clock frequency $ f $. The activation function $ \sigma $ is provided by the nonlinear switching dynamics of the transistor logic.
 
 ### C. Chronos Dynamics: Timing as the Observable
 
@@ -135,22 +132,22 @@ $$
 K_{sync} = \exp \left( -\sigma_J^2 f_{clk} / 2\pi \right) \cdot \Sigma_k \cos \left( \Delta \varphi_k \right)
 $$
 
-where \( \sigma_J \) is the network jitter, \( f_{clk} \) is the ASIC clock frequency, and \( \Delta \varphi_k \) is the phase offset of the k-th hash core. This formulation captures how timing coherence between software observation and hardware dynamics affects the quality of the observable signal.
+where $ \sigma_J $ is the network jitter, $ f_{clk} $ is the ASIC clock frequency, and $ \Delta \varphi_k $ is the phase offset of the k-th hash core. This formulation captures how timing coherence between software observation and hardware dynamics affects the quality of the observable signal.
 
 The primary observables implemented in the current system are:
-- **Coefficient of Variation (CV):** \( CV = \sigma / \mu \) of inter-arrival times. For a Poisson process, \( CV = 1 \). Deviations indicate non-random structure.
+- **Coefficient of Variation (CV):** $ CV = \sigma / \mu $ of inter-arrival times. For a Poisson process, $ CV = 1 $. Deviations indicate non-random structure.
 - **Histogram Entropy:** Shannon entropy of the inter-arrival time distribution, indicating the complexity of timing patterns.
 - **Hamming Distance:** Bit differences between consecutive hash outputs, serving as a diffusion quality proxy.
 
 ### D. Phase Transition Hypothesis
 
-We hypothesize that the transition from reliable to unreliable ASIC operation follows a phase transition that can be modeled using Ginzburg-Landau formalism. Define the order parameter \( \psi \) as the degree of global core synchronization. The free energy of the silicon substrate is:
+We hypothesize that the transition from reliable to unreliable ASIC operation follows a phase transition that can be modeled using Ginzburg-Landau formalism. Define the order parameter $ \psi $ as the degree of global core synchronization. The free energy of the silicon substrate is:
 
 $$
 F(\psi, V) = F_0 + \alpha (V - V_{crit}) \psi^2 + b \psi^4 + \gamma |\nabla \psi|^2
 $$
 
-At \( V = V_{crit} \), the coefficient \( \alpha (V - V_{crit}) \) changes sign, potentially triggering a spontaneous symmetry breaking that manifests as coherent oscillations—the hypothesized **"Silicon Heartbeat."**
+At $ V = V_{crit} $, the coefficient $ \alpha (V - V_{crit}) $ changes sign, potentially triggering a spontaneous symmetry breaking that manifests as coherent oscillations—the hypothesized **"Silicon Heartbeat."**
 
 **Important Clarification:** This phase transition model is a theoretical hypothesis. Empirical validation requires systematic voltage sweeps with rigorous statistical analysis, which is planned for future work.
 
@@ -172,13 +169,15 @@ $$
 
 This logarithmic scaling emerges because hierarchical representations allow state transitions to be encoded in the structure of the representation itself, rather than requiring explicit enumeration.
 
-For typical reservoir dimensions (\( n \sim 10^4 \) states), the theoretical efficiency ratio is:
+For typical reservoir dimensions ($ n \sim 10^4 $ states), the theoretical efficiency ratio is:
 
 $$
 E_{vN} / E_{HNS} \approx 2^n / \log(n) \approx 10^4
 $$
 
 This provides the theoretical foundation for the projected 10,000× efficiency improvement mentioned in preliminary descriptions of this work. We emphasize that this is a theoretical upper bound derived from information-theoretic considerations, not a measured result. Experimental validation under controlled conditions is required to determine achievable efficiency gains.
+
+
 
 
 Theoretical Framework: From Physical Substrate to Computation
